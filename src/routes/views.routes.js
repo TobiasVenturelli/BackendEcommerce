@@ -61,6 +61,6 @@ routerViews.get("/changepassword/:token", checkResetToken, viewChangePassword);
 routerViews.post("/changepassword", changePassword);
 
 // Documentación de la API
-// routerViews.get("/docs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
+ routerViews.get("/docs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
 
 export { routerViews };
