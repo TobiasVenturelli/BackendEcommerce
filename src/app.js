@@ -119,3 +119,5 @@ socketServer.on("connection", async (socket) => {
     socketServer.emit("messages", messages);
   });
 });
+
+export default app

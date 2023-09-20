@@ -1,11 +1,15 @@
 {
-  "name": "entrega-demo",
+  "name": "backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon ./src/app.js"
+    "dev": "nodemon ./src/app.js",
+    "test:products": "mocha test/products.test.js",
+    "test:carts": "mocha test/carts.test.js",
+    "test:sessions": "mocha test/sessions.test.js",
+    "test": "npm run test:products && npm run test:carts && npm run test:sessions"
   },
   "keywords": [],
   "author": "",
@@ -13,14 +17,13 @@
   "dependencies": {
     "@faker-js/faker": "^8.0.2",
     "bcrypt": "^5.1.1",
-    "chai": "^4.3.8",
+    "chai-http": "^4.4.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-handlebars": "^7.1.2",
     "express-session": "^1.17.3",
     "jsonwebtoken": "^9.0.1",
-    "mocha": "^10.2.0",
     "mongoose": "^7.4.3",
     "mongoose-paginate-v2": "^1.7.31",
     "nodemailer": "^6.9.4",
@@ -28,9 +31,13 @@
     "passport-github2": "^0.1.12",
     "passport-local": "^1.0.0",
     "socket.io": "^4.7.2",
-    "supertest": "^6.3.3",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
     "winston": "^3.10.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.8",
+    "mocha": "^10.2.0",
+    "supertest": "^6.3.3"
   }
 }
