@@ -5,7 +5,7 @@ const userSchema = new Schema({
   last_name: String,
   email: {
     type: String,
-    unique: true, // El mail debe ser único
+    unique: true, 
   },
   age: Number,
   password: String,
@@ -17,7 +17,14 @@ const userSchema = new Schema({
     type: String,
     enum: ["user", "admin", "premium"],
     default: "user",
-  }
+  },
+  documents: [
+    {
+      name: String,
+      reference: String,
+    },
+  ],
+  last_connection: Date, 
 });
 
 const userModel = model("user", userSchema);

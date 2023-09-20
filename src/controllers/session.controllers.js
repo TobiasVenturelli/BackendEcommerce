@@ -6,6 +6,10 @@ const login = async (req, res) => {
 
     req.session.user = userDTO(req.user);
 
+    req.user.last_connection = new Date();
+
+    await req.user.save();
+
     res.send({ status: "success", payload: req.session.user });
   } catch (error) {
     logger.error(error.message);
@@ -20,6 +24,9 @@ const logout = async (req, res) => {
       if (err) {
         return res.status(500).json({ error: "Error al cerrar sesión" });
       }
+      req.user.last_connection = new Date();
+      
+      req.user.save();
       // Devolvemos el mensaje de sesión cerrada
       res.json({ message: "Sesión cerrada" });
     });
