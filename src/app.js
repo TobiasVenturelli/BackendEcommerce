@@ -4,7 +4,6 @@ import handlebars from "express-handlebars";
 import session from "express-session";
 import passport from "passport";
 import { Server } from "socket.io";
-
 import config from "./config/config.js";
 import { mongoDBConnection } from "./config/mongoDB.config.js";
 import { initializePassport } from "./config/passport.config.js";
