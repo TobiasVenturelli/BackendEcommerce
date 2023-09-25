@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin User View</title>
+</head>
+<body>
+    <h1>Detalles del Usuario</h1>
+    <p>Nombre: {{user.name}}</p>
+    <p>Correo: {{user.email}}</p>
+    <p>Rol Actual: {{user.role}}</p>
+
+    <h2>Modificar Rol</h2>
+    <form action="/api/users/changeRole/{{user._id}}" method="POST">
+        <select name="newRole">
+            <option value="user">Usuario</option>
+            <option value="admin">Administrador</option>
+        </select>
+        <button type="submit">Cambiar Rol</button>
+    </form>
+
+    <h2>Eliminar Usuario</h2>
+    <form action="/api/users/deleteUser/{{user._id}}" method="POST">
+        <button type="submit">Eliminar Usuario</button>
+    </form>
+</body>
+</html>

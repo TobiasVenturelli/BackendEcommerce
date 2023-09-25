@@ -50,8 +50,8 @@ const products = async (req, res) => {
       page: resProducts.page,
       hasPrevPage,
       hasNextPage,
-      prevLink: `http://localhost:8080/products?page=${prevPage}`,
-      nextLink: `http://localhost:8080/products?page=${nextPage}`,
+      prevLink: `http://localhost:8081/products?page=${prevPage}`,
+      nextLink: `http://localhost:8081/products?page=${nextPage}`,
     });
   } catch (error) {
     logger.error(error.message);

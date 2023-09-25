@@ -24,4 +24,9 @@ const changeRole = async (email) => {
   return user;
 };
 
-export { createUser, getUserByEmail, getUserById, changePassword, changeRole };
+const getAllUsersWithEssentialData = async () => {
+  const users = await userDao.getAllUsers();
+  return users;
+};
+
+export { createUser, getUserByEmail, getUserById, changePassword, changeRole, getAllUsersWithEssentialData };
