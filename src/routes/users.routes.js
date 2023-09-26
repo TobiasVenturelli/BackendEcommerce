@@ -6,7 +6,7 @@ import { isAuthorize } from "../middlewares/checkUser.js";
 const routerUsers = Router();
 
 routerUsers.get("/", getAllUsers);
-routerUsers.get("/changeRole/:uid", changeRole);
+routerUsers.get("/changeRole/:uid", isAuthorize, changeRole);
 routerUsers.post("/:uid/documents", upload.array("documents", 5), uploadDocuments);
 
 routerUsers.get("/adminView/:uid", isAuthorize, adminUserView);

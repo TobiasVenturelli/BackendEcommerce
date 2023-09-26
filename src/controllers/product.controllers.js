@@ -2,6 +2,7 @@ import * as productServices from "../services/product.services.js";
 import { EErrors, customError } from "../utils/customErro.js";
 import { generateProducts } from "../utils/generateProducts.js";
 import { logger } from "../utils/logger.js";
+import { sendProductDeletionEmail } from "../utils/sendProductDeletionEmail.js";
 
 const getAllProducts = async (req, res) => {
   try {
@@ -17,8 +18,8 @@ const getAllProducts = async (req, res) => {
       page: resProducts.page,
       hasPrevPage,
       hasNextPage,
-      prevLink: `http://localhost:8080/products?page=${prevPage}`,
-      nextLink: `http://localhost:8080/products?page=${nextPage}`,
+      prevLink: `http://localhost:8081/products?page=${prevPage}`,
+      nextLink: `http://localhost:8081/products?page=${nextPage}`,
     });
   } catch (error) {
     logger.error(error.message);
@@ -76,16 +77,32 @@ const updateProduct = async (req, res) => {
   }
 };
 
+
 const deleteProduct = async (req, res) => {
   const { id } = req.params;
   try {
-    await productServices.deleteProduct(id);
-    res.status(200).json({ msg: "Producto eliminado" });
+    const product = await productServices.getProductById(id);
+
+    if (!product) {
+      return res.status(404).json({ error: "Producto no encontrado" });
+    }
+
+    const user = req.session.user;
+    if (product.owner === user.email) {
+      await productServices.deleteProduct(id);
+      if (user.role === "premium") {
+        await sendProductDeletionEmail(user.email, product.name);
+      }
+      res.status(200).json({ msg: "Producto eliminado con éxito" });
+    } else {
+      res.status(403).json({ error: "No tiene permisos para realizar esta acción" });
+    }
   } catch (error) {
     logger.error(error.message);
-    res.status(500).json({ error: "Server internal error" });
+    res.status(500).json({ error: "Error interno del servidor" });
   }
 };
+
 
 const generateMockingProducts = async (req, res) => {
   try {
