@@ -3,6 +3,9 @@ import * as productServices from "../services/product.services.js";
 import { logger } from "../utils/logger.js";
 import Stripe from "stripe";
 
+const stripe = new Stripe
+  ('sk_test_51Nu1j2F7NLZZHDbCtA5eozP0XoeBur3uBQ1n229Gxeu0KT3DikXjwo9hY6OrcILvzwPTlGf5F4ifcE3IZFwasH0H00bfJjksY2')
+
 const getAllCarts = async (req, res) => {
   try {
     const carts = await cartServices.getAllCarts();
@@ -48,7 +51,7 @@ const addProductToCart = async (req, res) => {
     if (!product) return res.status(404).json({ msg: "Producto no encontrado" });
 
     const user = req.session.user;
-    if(user.email === product.owner) return res.status(403).json({ msg: "No puede agregar un producto propio al carrito" });
+    if (user.email === product.owner) return res.status(403).json({ msg: "No puede agregar un producto propio al carrito" });
 
     const response = await cartServices.addProductToCart(cid, pid);
 
@@ -167,6 +170,45 @@ const updateProductQuantityFromCart = async (req, res) => {
   }
 };
 
+const createSession = async (req, res) => {
+  try {
+      const line_items = [
+        {
+          price_data: {
+            products_data: {
+              name: 'Reloj de Pulsera',
+              description: 'Elegante reloj de pulsera para hombres con correa de cuero marrón.'
+            },
+            currency: 'usd',
+            unit_amount: 7500,
+          },
+          quantity: 1
+        },
+        {
+          price_data: {
+            products_data: {
+              name: 'Auriculares Inalámbricos',
+              description: 'Auriculares inalámbricos con cancelación de ruido para una experiencia auditiva excepcional.'
+            },
+            currency: 'usd',
+            unit_amount: 3000,
+          },
+          quantity: 2
+        }
+      ];
+      const session = await stripe.checkout.sessions.create({
+        mode: 'payment',
+      success_url: 'http://localhost:8081/success',
+      cancel_url: 'http://localhost:8081/cancel',
+      });
+      
+    return res.json(session)
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({ error: "Server internal error" });
+  }
+};
+
 const purchaseCart = async (req, res) => {
   const { cid } = req.params;
   const user = req.session.user;
@@ -196,4 +238,5 @@ export {
   updateProductQuantityFromCart,
   addProductInUserCart,
   purchaseCart,
+  createSession
 };

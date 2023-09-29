@@ -1,11 +1,21 @@
-{{! Mostramos los datos del usuario logueado }}
-
 <div class="container">
-  <p>Nombre: {{user.first_name}} {{user.last_name}}</p>
-  <p>Email: {{user.email}}</p>
-  <p>Rol: {{user.role}}</p>
-
-  <form action="/logout" method="get">
-    <input type="submit" class="btn btn-danger" value="Log Out" />
-  </form>
+  <div class="card shadow">
+    <div class="card-header">
+      <h4 class="card-title">Información del Usuario</h4>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <p class="mb-2"><strong>Nombre:</strong> {{user.first_name}} {{user.last_name}}</p>
+          <p class="mb-2"><strong>Email:</strong> {{user.email}}</p>
+          <p class="mb-2"><strong>Rol:</strong> {{user.role}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <form action="/logout" method="get">
+        <button type="submit" class="btn btn-danger">Cerrar sesión</button>
+      </form>
+    </div>
+  </div>
 </div>
