@@ -1,3 +1,4 @@
+<!-- Mostrar productos -->
 <div class="container">
   <div class="card shadow">
     <div class="card-header">
@@ -17,5 +18,28 @@
         <button type="submit" class="btn btn-danger">Cerrar sesión</button>
       </form>
     </div>
+  </div>
+</div>
+
+<!-- Mostrar productos -->
+
+<div class="container mt-5">
+  <h2>Productos Disponibles</h2>
+  <div class="row">
+    {{#each products}}
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <img src="{{thumbnail}}" class="card-img-top" alt="{{title}}">
+        <div class="card-body">
+          <h5 class="card-title">{{title}}</h5>
+          <p class="card-text">{{description}}</p>
+          <p class="card-text"><strong>Precio:</strong> ${{price}}</p>
+          <p class="card-text"><strong>Stock:</strong> {{stock}}</p>
+          <!-- Agregar un botón de carrito aquí -->
+          <a href="/agregar-al-carrito/{{id}}" class="btn btn-primary">Agregar al Carrito</a>
+        </div>
+      </div>
+    </div>
+    {{/each}}
   </div>
 </div>

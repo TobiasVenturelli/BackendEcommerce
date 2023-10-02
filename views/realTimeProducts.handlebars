@@ -1,42 +1,72 @@
-
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <form id="productForm" class="d-flex flex-column col-4 ms-3">
-      <label for="">Título</label>
-      <input type="text" name="title" id="title" />
-      <label for="">Precio</label>
-      <input type="number" name="price" id="price" />
-      <label for="">Descripción</label>
-      <input type="text" name="description" id="description" />
-      <label for="">Imagen</label>
-      <input type="text" name="thumbnail" id="thumbnail" />
-      <label for="">Status</label>
-      <select name="status" id="status">
-        <option value="true">Disponible</option>
-        <option value="false">No disponible</option>
-      </select>
-      <label for="">Stock</label>
-      <input type="number" name="stock" id="stock" />
-      <label for="">Código</label>
-      <input type="text" id="code" name="code" />
-      <label for="">Categoría</label>
-      <input type="text" id="category" name="category" />
-      <button type="submit" class="btn btn-primary">Agregar</button>
-    </form>
-    <form action="" class="ms-3 mt-3" id="formDelete">
-      <label for="">ID producto a eliminar</label>
-      <input type="text" name="id" id="id" />
-      <button type="submit" class="btn btn-danger">Eliminar</button>
-    </form>
-
-    <div id="productsContainer" class="row"></div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrar Productos</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Agregar Producto</h2>
+                <form id="productForm" class="d-flex flex-column">
+                    <div class="form-group">
+                        <label for="title">Título</label>
+                        <input type="text" class="form-control" id="title" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Precio</label>
+                        <input type="number" class="form-control" id="price" name="price" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Descripción</label>
+                        <input type="text" class="form-control" id="description" name="description" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="thumbnail">Imagen</label>
+                        <input type="text" class="form-control" id="thumbnail" name="thumbnail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select class="form-control" id="status" name="status">
+                            <option value="true">Disponible</option>
+                            <option value="false">No disponible</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="stock">Stock</label>
+                        <input type="number" class="form-control" id="stock" name="stock" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="code">Código</label>
+                        <input type="text" class="form-control" id="code" name="code">
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Categoría</label>
+                        <input type="text" class="form-control" id="category" name="category">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Agregar</button>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <h2>Eliminar Producto</h2>
+                <form action="" id="formDelete">
+                    <div class="form-group">
+                        <label for="id">ID producto a eliminar</label>
+                        <input type="text" class="form-control" id="id" name="id">
+                    </div>
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+            </div>
+        </div>
+        <div class="row mt-5" id="productsContainer">
+            <!-- Aquí se mostrarán los productos -->
+        </div>
+    </div>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/index.js"></script>
-  </body>
+</body>
 </html>

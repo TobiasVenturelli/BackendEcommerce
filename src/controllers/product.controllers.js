@@ -27,6 +27,19 @@ const getAllProducts = async (req, res) => {
   }
 };
 
+const getProducts = async (req, res) => {
+  try {
+    const products = await productServices.getAllProducts(req.query);
+
+    // Renderizar la página con los productos
+    res.render("user-page", { user: req.session.user, products });
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
+};
+
+
 const getProductById = async (req, res) => {
   const { id } = req.params;
   try {
@@ -122,4 +135,6 @@ const generateMockingProducts = async (req, res) => {
   }
 };
 
-export { addProduct, deleteProduct, generateMockingProducts, getAllProducts, getProductById, updateProduct };
+export {
+  addProduct, deleteProduct, generateMockingProducts, getAllProducts, getProductById, updateProduct, getProducts
+}

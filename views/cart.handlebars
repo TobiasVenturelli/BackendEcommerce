@@ -1,23 +1,29 @@
 <h3>Carrito</h3>
 
-
-{{!-- Hacemos una tabla con los productos agregados al carrito --}}
-
+{{!-- Verificamos si hay productos en el carrito --}}
+{{#if products.length}}
 <table class="table table-striped">
     <thead>
         <tr>
             <th>Producto</th>
             <th>Precio</th>
             <th>Cantidad</th>
-            <th></th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
         {{#each products}}
         <tr>
-            <td>{{product.title}}</td>
-            <td>{{product.price}}</td>
-            <td>{{quantity}}</td>
+            <td>{{this.product.title}}</td>
+            <td>{{this.product.price}}</td>
+            <td>{{this.quantity}}</td>
+            <td>
+                <a href="/remove/{{this.product._id}}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
         </tr>
         {{/each}}
     </tbody>
+</table>
+{{else}}
+<p>No hay productos en tu carrito.</p>
+{{/if}}

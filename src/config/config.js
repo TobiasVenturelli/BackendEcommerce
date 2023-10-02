@@ -8,4 +8,5 @@ export default {
   JWT_SECRET: process.env.JWT_SECRET,
   PORT: process.env.PORT,
   COOKIE_SECRET: process.env.COOKIE_SECRET,
+  STRIPE_PRIVATE_KEY: process.env.STRIPE_PRIVATE_KEY
 };

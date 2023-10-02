@@ -18,7 +18,7 @@ import { isAuthorize, isLogin, isUserAuthorized } from "../middlewares/checkUser
 const routerCarts = Router();
 
 // Proceso de compra de un carrito
-routerCarts.get("/create-checkout-session", isLogin, createSession);
+routerCarts.post("/create-checkout-session", isLogin, createSession);
 routerCarts.get("/success", (req, res) => res.send("success"));
 routerCarts.get("/cancel", (req, res) => res.send("cancel"));
 
@@ -50,7 +50,7 @@ routerCarts.put("/:cid", updateProductsFromCart);
 
 // Actualizamos la cantidad de un producto en el carrito
 routerCarts.put("/:cid/products/:pid", isAuthorize, updateProductQuantityFromCart);
-
+// Realizamos la compra de un carrito
 routerCarts.post("/:cid/purchase", isLogin, purchaseCart);
 
 export { routerCarts };
